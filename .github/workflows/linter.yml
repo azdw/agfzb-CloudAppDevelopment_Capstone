@@ -1,65 +1,35 @@
-name: 'Lint Code'
+Let’s look at each of these jobs:
 
-on:
-  push:
-    branches: [master, main]
-  pull_request:
-    branches: [master, main]
+lint_function_js
+Set up Node.js runtime for the action to run using the actions/setup-node@v3 action
+Check out the code using the actions/checkout@v3 action.
+Install all dependencies using npm npm install
+Run the linting command defined in package.json as npm run lint in the functions/sample/nodejs directory.
+lint_function_python
+Set up Python runtime for the action to run using the actions/setup-python@v4 action
+Check out the code using the actions/checkout@v3 action.
+Install all dependencies using pip install
+Run the linting command pylint *.py in the functions/sample/python directory.
+lint_django_server
+Set up Python runtime for the action to run using the actions/setup-python@v4 action
+Check out the code using the actions/checkout@v3 action.
+Install all dependencies using pip install
+Run the linting command pylint *.py in the server directory.
 
-jobs: # list of things to do
-  lint_function_js:
-    name: Linting JavaScript Function 
-    runs-on: ubuntu-latest 
-    steps: # list of steps
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+Let’s look at each of these jobs:
 
-      - name: Code Checkout
-        uses: actions/checkout@v3
-
-      - name: Install Dependencies
-        run: npm install
-        working-directory: functions/sample/nodejs
-
-      - name: Code Linting
-        run: npm run lint
-        working-directory: functions/sample/nodejs
-    
-
-  lint_function_python:
-    name: Linting Python Function 
-    runs-on: ubuntu-latest 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.7
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pylint
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Lint with Pylint
-        run: pylint *.py
-        working-directory: functions/sample/python
-
-  lint_django_server:
-    name: Linting Django Server 
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.7
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pylint
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Lint with Pylint
-        run: pylint *.py
-        working-directory: server
+lint_function_js
+Set up Node.js runtime for the action to run using the actions/setup-node@v3 action
+Check out the code using the actions/checkout@v3 action.
+Install all dependencies using npm npm install
+Run the linting command defined in package.json as npm run lint in the functions/sample/nodejs directory.
+lint_function_python
+Set up Python runtime for the action to run using the actions/setup-python@v4 action
+Check out the code using the actions/checkout@v3 action.
+Install all dependencies using pip install
+Run the linting command pylint *.py in the functions/sample/python directory.
+lint_django_server
+Set up Python runtime for the action to run using the actions/setup-python@v4 action
+Check out the code using the actions/checkout@v3 action.
+Install all dependencies using pip install
+Run the linting command pylint *.py in the server directory.
